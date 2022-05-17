@@ -39,7 +39,7 @@ Raw_Com::Raw_Com(QObject *parent)
         {
             Com_Port->setPortName(Com_Port_Name);
             Com_Port->open(QSerialPort::ReadWrite);
-            Com_Port->setBaudRate(QSerialPort::Baud115200);
+            Com_Port->setBaudRate(QSerialPort::Baud9600);
             Com_Port->setDataBits(QSerialPort::Data8);
             Com_Port->setStopBits(QSerialPort::OneStop);
             Com_Port->setParity(QSerialPort::NoParity);
@@ -57,6 +57,7 @@ Raw_Com::Raw_Com(QObject *parent)
 void Raw_Com::readSerial()
 {
     QByteArray serialData = Com_Port->read(1);
+    qDebug() << "Reading: " << serialData;
 
     //TODO: Übergabe des gelesenen Bytes
     return;
@@ -66,5 +67,6 @@ void Raw_Com::readSerial()
 void Raw_Com::write(QByteArray out)
 {
     Com_Port->write(out);
+    qDebug() << "Writing: " << out;
     return;
 }

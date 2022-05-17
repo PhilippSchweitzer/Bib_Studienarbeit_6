@@ -1,12 +1,14 @@
 #include <QCoreApplication>
 #include <QSerialPort>
-#include <raw_com.h>
+#include <write_com.h>
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    Raw_Com ESP32;
+    Write_Com ESP32;
+
+    ESP32.send('w', 72);
 
     return a.exec();
 }

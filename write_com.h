@@ -2,6 +2,7 @@
 #define WRITE_COM_H
 
 #include "raw_com.h"
+#include <bitset>
 
 #define CRC_SALT 0x5A
 

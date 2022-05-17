@@ -41,9 +41,12 @@ void Write_Com::send_async(char Identifier)
 QByteArray Write_Com::make_Telegram(char Identifier, int Data)
 {
     QByteArray out;
-    out.setRawData(&Identifier, Data);
+
+    out.push_back(Identifier);
+    out.push_back(Data);
 
     //TODO: CRC
+    qDebug() << "Telegram is:" << out;
 
     return out;
 }
