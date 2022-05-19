@@ -2,9 +2,9 @@
 #define READ_COM_H
 
 #include "header_com.h"
-#include "crc_com.h"
+#include "telegram_com.h"
 
-class Read_Com : public CRC_Com
+class Read_Com
 {
 
 public:
@@ -21,13 +21,5 @@ private:
 
 };
 
-/*
-Telegram:
-Byte    Function
-0       Wie viele Bytes ist dieses Telegram lang
-1       Identifier (Für welche Funktion sind die Daten bestimmt)
-2 - X   Daten
-X + 1   CRC
-*/
 
 #endif // READ_COM_H

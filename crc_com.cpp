@@ -10,9 +10,9 @@ CRC_Com::~CRC_Com()
 
 }
 
-char CRC_Com::get_CRC(QByteArray raw_Data)
+char CRC_Com::get_CRC(QByteArray raw_Data, uint8_t remainder)
 {
-    uint8_t remainder = 0;
+
     for (int i = 0; i < raw_Data.length(); i++)
         remainder = CRC8(remainder, raw_Data[i]);
 

@@ -31,3 +31,7 @@ void Read_Com::read(QByteArray in)
     return;
 }
 
+void Read_Com::callback()
+{
+
+}

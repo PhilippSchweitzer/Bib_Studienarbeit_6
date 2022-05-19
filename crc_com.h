@@ -3,6 +3,8 @@
 
 #include "header_com.h"
 
+#define CRC_SALT 0x5A
+
 class CRC_Com
 {
 
@@ -11,7 +13,7 @@ public:
     virtual ~CRC_Com();
 
 protected:
-    char get_CRC(QByteArray);
+    char get_CRC(QByteArray, uint8_t remainder);
 
 private:
     uint8_t CRC8(uint8_t, uint8_t);

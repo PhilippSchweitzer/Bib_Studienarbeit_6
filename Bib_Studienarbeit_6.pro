@@ -13,6 +13,7 @@ SOURCES += \
         main.cpp \
         raw_com.cpp \
         read_com.cpp \
+        telegram_com.cpp \
         write_com.cpp
 
 # Default rules for deployment.
@@ -25,4 +26,5 @@ HEADERS += \
     header_com.h \
     raw_com.h \
     read_com.h \
+    telegram_com.h \
     write_com.h

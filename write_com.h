@@ -18,10 +18,6 @@ public:
 
     void send_async(char Identifier, int Data);
     void send_async(char Identifier);
-
-private:
-    QByteArray make_Telegram(char Identifier, int Data);
-    QByteArray make_Telegram(char Identifier);
 };
 
 #endif // WRITE_COM_H
