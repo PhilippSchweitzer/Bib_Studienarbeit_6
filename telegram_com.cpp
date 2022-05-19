@@ -18,7 +18,7 @@ Telegram_Com::Telegram_Com(char Identifier, int Data)
     //TODO: put this in Telegram Class
     raw_Data.push_back(Identifier);
     raw_Data.push_back(Data);
-    raw_Data.push_front(raw_Data.size() + 1);
+    raw_Data.push_front(raw_Data.size() + 2);
     raw_Data.push_back(get_CRC(raw_Data, 0));
 
     qDebug() << "Telegram is:" << raw_Data;
@@ -28,7 +28,7 @@ Telegram_Com::Telegram_Com(char Identifier, int Data)
     identifier = (char) raw_Data[1];
     for(int i = 2; i < raw_Data.size(); i++)
         data.push_back(raw_Data[i]);
-    crc_correct = check_CRC(raw_Data);
+    crc_correct = true;
 }
 
 Telegram_Com::Telegram_Com(char Identifier)
@@ -36,6 +36,7 @@ Telegram_Com::Telegram_Com(char Identifier)
     QByteArray raw_Data;
     //TODO: put this in Telegram Class
     raw_Data.push_back(Identifier);
+    raw_Data.push_front(raw_Data.size() + 2);
     raw_Data.push_back(get_CRC(raw_Data, 0));
 
     qDebug() << "Telegram is:" << raw_Data;
@@ -45,7 +46,7 @@ Telegram_Com::Telegram_Com(char Identifier)
     identifier = (char) raw_Data[1];
     for(int i = 2; i < raw_Data.size(); i++)
         data.push_back(raw_Data[i]);
-    crc_correct = check_CRC(raw_Data);
+    crc_correct = true;
 }
 
 Telegram_Com::~Telegram_Com()
