@@ -21,6 +21,9 @@ public:
 private slots:
     void readSerial();
 
+protected:
+    bool sync;
+
 private:
     QSerialPort *Com_Port;
 };

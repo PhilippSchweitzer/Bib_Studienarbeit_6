@@ -13,29 +13,33 @@ Write_Com::~Write_Com()
 
 void Write_Com::send(char Identifier, int Data)
 {
-    QByteArray out = make_Telegram(Identifier, Data);
-    write(out);
-
+    write(make_Telegram(Identifier, Data));
     return;
 }
 
 
 void Write_Com::send(char Identifier)
 {
-    QByteArray out = make_Telegram(Identifier);
-    write(out);
-
+    write(make_Telegram(Identifier));
     return;
 }
 
 void Write_Com::send_async(char Identifier, int Data)
 {
-    //TODO
+    write(make_Telegram(Identifier, Data));
+    sync = false;
+    //TODO blockieren bis Antwort ankommt, Antwort hier lesen und als QByteArray zurück geben
+    sync = true;
+    return;
 }
 
 void Write_Com::send_async(char Identifier)
 {
-    //TODO
+    write(make_Telegram(Identifier));
+    sync = false;
+    //TODO blockieren bis Antwort ankommt, Antwort hier lesen und als QByteArray zurück geben
+    sync = true;
+    return;
 }
 
 QByteArray Write_Com::make_Telegram(char Identifier, int Data)
@@ -53,18 +57,22 @@ QByteArray Write_Com::make_Telegram(char Identifier, int Data)
 
 QByteArray Write_Com::make_Telegram(char Identifier)
 {
-    //TODO: CRC
-    return QByteArray(1, Identifier);
+    QByteArray out;
+
+    out.push_back(Identifier);
+    out.push_back(getCRC(out));
+
+    qDebug() << "Telegram is:" << out;
+
+    return out;
 }
 
-
+//TODO eigene Klasse für CRC damit es für Senden und Empfangen genutzt werden kann.
 char Write_Com::getCRC(QByteArray raw_Data)
 {
     uint8_t remainder = 0;
     for (int i = 0; i < raw_Data.length(); i++)
         remainder = CRC8(remainder, raw_Data[i]);
-
-
 
     qDebug() << "CRC is:" << remainder << " / " << (char) remainder;
 
@@ -81,7 +89,7 @@ char Write_Com::getCRC(QByteArray raw_Data)
   byte of the message to send. the last result of the remainder is added to
   the message as the CRC value.
 
-  The receiver initializes the remainder with 0 and then calls CRC8 for each
+  The receiver initializes the remainder with CRC_SALT = 0x5A and then calls CRC8 for each
   byte of the message received including the CRC value. The last result of
   the remainder must be 0 for a correct message.
 */

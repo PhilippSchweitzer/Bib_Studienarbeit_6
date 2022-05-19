@@ -1,14 +1,6 @@
 #include "raw_com.h"
 
 
-Raw_Com::~Raw_Com()
-{
-    if(Com_Port->isOpen())
-       Com_Port->close();
-}
-
-
-
 Raw_Com::Raw_Com(QObject *parent)
 {
     //Important Debug to Identify ID's!
@@ -21,6 +13,7 @@ Raw_Com::Raw_Com(QObject *parent)
                      << "Product ID is: " << SerialPortInfo.productIdentifier();
         }
     */
+        sync = true;
 
         Com_Port = new QSerialPort;
         bool Com_Port_Available = false;
@@ -54,15 +47,11 @@ Raw_Com::Raw_Com(QObject *parent)
 
 }
 
-void Raw_Com::readSerial()
+Raw_Com::~Raw_Com()
 {
-    QByteArray serialData = Com_Port->read(1);
-    qDebug() << "Reading: " << serialData;
-
-    //TODO: Übergabe des gelesenen Bytes
-    return;
+    if(Com_Port->isOpen())
+       Com_Port->close();
 }
-
 
 void Raw_Com::write(QByteArray out)
 {
@@ -70,3 +59,16 @@ void Raw_Com::write(QByteArray out)
     qDebug() << "Writing: " << out;
     return;
 }
+
+void Raw_Com::readSerial()
+{
+    if(sync == true)
+    {
+        QByteArray serialData = Com_Port->read(1);
+        qDebug() << "Reading: " << serialData;
+
+        //TODO: Übergabe des gelesenen Bytes
+    }
+    return;
+}
+
