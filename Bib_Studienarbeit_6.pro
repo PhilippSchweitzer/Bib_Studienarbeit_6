@@ -9,8 +9,10 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+        crc_com.cpp \
         main.cpp \
         raw_com.cpp \
+        read_com.cpp \
         write_com.cpp
 
 # Default rules for deployment.
@@ -19,5 +21,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
+    crc_com.h \
+    header_com.h \
     raw_com.h \
+    read_com.h \
     write_com.h
