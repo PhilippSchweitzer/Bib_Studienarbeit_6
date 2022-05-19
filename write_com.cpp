@@ -44,8 +44,8 @@ QByteArray Write_Com::make_Telegram(char Identifier, int Data)
 
     out.push_back(Identifier);
     out.push_back(Data);
+    out.push_back(getCRC(out));
 
-    //TODO: CRC
     qDebug() << "Telegram is:" << out;
 
     return out;
@@ -60,13 +60,15 @@ QByteArray Write_Com::make_Telegram(char Identifier)
 
 char Write_Com::getCRC(QByteArray raw_Data)
 {
-    std::vector<uint8_t> Telegram;
-
     uint8_t remainder = 0;
     for (int i = 0; i < raw_Data.length(); i++)
-        remainder = CRC8(remainder, Telegram[i]);
+        remainder = CRC8(remainder, raw_Data[i]);
 
-    return remainder;
+
+
+    qDebug() << "CRC is:" << remainder << " / " << (char) remainder;
+
+    return (char) remainder;
 }
 
 /*
@@ -86,7 +88,7 @@ char Write_Com::getCRC(QByteArray raw_Data)
 
 uint8_t Write_Com::CRC8(uint8_t remainder, uint8_t nextByte)
 {
-#define GENERATOR 0x07 // CRC8 (ITU-T) generator polynomial 0x107
+#define GENERATOR 0x07
     remainder ^= nextByte;
     for (uint8_t bit = 7; bit; --bit)
     {
