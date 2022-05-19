@@ -67,6 +67,8 @@ void Raw_Com::readSerial()
         QByteArray serialData = Com_Port->read(1);
         qDebug() << "Reading: " << serialData;
 
+        read(Com_Port->read(1));
+
         //TODO: Übergabe des gelesenen Bytes
     }
     return;

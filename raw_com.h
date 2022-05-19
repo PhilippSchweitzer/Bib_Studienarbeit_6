@@ -7,8 +7,7 @@
 #define Vender_ID_ESP32 4292
 #define Product_ID_ESP32 60000
 
-//TODO Readcom+CRCcom einkommentieren und get_CRC einkommentieren
-//TODO Linker Probleme fixen
+
 class Raw_Com : public QObject, public Read_Com
 {
             Q_OBJECT

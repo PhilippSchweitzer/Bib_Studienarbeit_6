@@ -48,9 +48,8 @@ QByteArray Write_Com::make_Telegram(char Identifier, int Data)
 
     out.push_back(Identifier);
     out.push_back(Data);
-    //out.push_back(get_CRC(out));
-    //TODO Telegramm länge hinzufügen
-    out.push_front(out.size());
+    out.push_front(out.size() + 1);
+    out.push_back(get_CRC(out));
 
     qDebug() << "Telegram is:" << out;
 
