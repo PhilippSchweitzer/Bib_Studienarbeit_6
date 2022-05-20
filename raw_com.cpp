@@ -41,8 +41,7 @@ Raw_Com::Raw_Com(QObject *parent)
         }
         else
         {
-            //qDebug() << "Not connected!";
-            //TODO: Error Handling mit Lamda funktion, damit Endnutzer festlegen kann was passieren soll
+            callback(0x00, NOT_CONNECTED);
         }
 
 }
@@ -60,6 +59,18 @@ void Raw_Com::write(QByteArray out)
     return;
 }
 
+bool Raw_Com::Com_Available()
+{
+    if(QSerialPortInfo(*Com_Port).vendorIdentifier() == Vender_ID
+       && QSerialPortInfo(*Com_Port).productIdentifier() == Product_ID)
+    {
+        return true;
+    }
+
+    qDebug() << "Disconnected!";
+    return false;
+}
+
 void Raw_Com::readSerial()
 {
     if(sync == true)
@@ -67,9 +78,6 @@ void Raw_Com::readSerial()
         QByteArray serialData = Com_Port->read(1);
         qDebug() << "Reading: " << serialData;
         get_Data(serialData);
-
-
-        //TODO: Übergabe des gelesenen Bytes
     }
     return;
 }

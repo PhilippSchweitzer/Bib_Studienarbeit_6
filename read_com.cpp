@@ -36,7 +36,6 @@ void Read_Com::get_Data(QByteArray in)
     return;
 }
 
-//TODO Liste aus configuration_com.h verwenden, eventuell auf lambda umstellen (unabhänig von Qt)
 void Read_Com::callback(uint8_t Identifier, QByteArray Data)
 {
 

@@ -7,7 +7,7 @@ Telegram_Com::Telegram_Com(QByteArray raw_Data)
     raw_telegram = raw_Data;
     lenght = (int) raw_Data[0];
     identifier = (char) raw_Data[1];
-    for(int i = 2; i < raw_Data.size(); i++)
+    for(int i = 2; i < raw_Data.size() - 1; i++)
         data.push_back(raw_Data[i]);
     crc_correct = check_CRC(raw_Data);
 }
