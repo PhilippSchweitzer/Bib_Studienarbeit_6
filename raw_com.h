@@ -4,6 +4,8 @@
 #include "header_com.h"
 #include "read_com.h"
 
+#define Vender_ID 4292
+#define Product_ID 60000
 
 
 class Raw_Com : public QObject, public Read_Com

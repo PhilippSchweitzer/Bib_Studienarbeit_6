@@ -1,17 +1,5 @@
-#include "function_id_list_com.h"
+/*#include "test_functions_com.h"
 
-id_list::id_list(uint8_t id, void (*foo)(QByteArray))
-{
-     Identifier = id;
-     callback = foo;
-}
-
-id_list::~id_list()
-{
-
-}
-
-//TODO Beispiele entfernen
 void example1(QByteArray Data)
 {
     qDebug() << "example 1 is called, Data is: " << Data;
@@ -29,3 +17,11 @@ void example3(QByteArray Data)
     qDebug() << "example 3 is called, Data is: " << Data;
     return;
 }
+
+std::vector<function_id_com> function_id_list =
+{
+    {0x01, example1},               //TODO: Beispiele entfernen
+    {0x02, example2},
+    {0x03, example3}
+};
+*/

@@ -6,7 +6,5 @@
 #include <QSerialPort>
 #include <QSerialPortInfo>
 
-#include "configuration_com.h"
-
 
 #endif // HEADER_COM_H

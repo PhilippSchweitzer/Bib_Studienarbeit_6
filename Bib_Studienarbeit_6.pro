@@ -10,7 +10,8 @@ CONFIG += c++11
 
 SOURCES += \
         crc_com.cpp \
-        function_id_list_com.cpp \
+        function_id_com.cpp \
+        function_list_com.cpp \
         main.cpp \
         raw_com.cpp \
         read_com.cpp \
@@ -23,9 +24,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    configuration_com.h \
     crc_com.h \
-    function_id_list_com.h \
+    function_id_com.h \
     header_com.h \
     raw_com.h \
     read_com.h \
