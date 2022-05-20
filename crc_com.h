@@ -12,7 +12,6 @@ public:
     CRC_Com();
     virtual ~CRC_Com();
 
-protected:
     char get_CRC(QByteArray, uint8_t remainder);
 
 private:

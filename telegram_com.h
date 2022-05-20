@@ -29,8 +29,10 @@ public:
     char identifier;
     QByteArray data;
     bool crc_correct;
-    bool check_CRC(QByteArray);
+    bool async;
 
+
+    bool check_CRC(QByteArray);
 };
 
 #endif // TELEGRAM_COM_H
