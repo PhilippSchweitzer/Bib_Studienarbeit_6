@@ -23,24 +23,22 @@ void Write_Com::send(char Identifier)
     return;
 }
 
-void Write_Com::send_async(char Identifier, int Data)
+QByteArray Write_Com::send_async(char Identifier, int Data)
 {
     write(Telegram_Com(Identifier, Data).raw_telegram);
     sync = false;
-    //TODO blockieren bis Antwort ankommt, Antwort hier lesen und als QByteArray zurück geben
-    //TODO testen
+    QByteArray answer = readSerial_async();
     sync = true;
-    return;
+    return answer;
 }
 
-void Write_Com::send_async(char Identifier)
+QByteArray Write_Com::send_async(char Identifier)
 {
     write(Telegram_Com(Identifier).raw_telegram);
     sync = false;
-    //TODO blockieren bis Antwort ankommt, Antwort hier lesen und als QByteArray zurück geben
-    //TODO testen
+    QByteArray answer = readSerial_async();
     sync = true;
-    return;
+    return answer;
 }
 
 

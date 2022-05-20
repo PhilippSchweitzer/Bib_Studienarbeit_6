@@ -73,12 +73,51 @@ bool Raw_Com::Com_Available()
 
 void Raw_Com::readSerial()
 {
+
     if(sync == true)
     {
         QByteArray serialData = Com_Port->read(1);
         qDebug() << "Reading: " << serialData;
         get_Data(serialData);
     }
+
     return;
 }
+
+QByteArray Raw_Com::readSerial_async()
+{
+    QByteArray answer;
+
+    Com_Port->waitForReadyRead(2000);
+    QByteArray serialData = Com_Port->read(1);
+    answer.push_back(serialData);
+    qDebug() << "Lengt of Answer is: " << serialData;
+    qDebug() << "Answer is: " << answer;
+
+    for(int i = 0; i < serialData.toHex().toInt() - 1; i++)
+    {
+        Com_Port->waitForReadyRead(2000);
+        answer.push_back(Com_Port->read(1));
+        qDebug() << "Answer is: " << answer;
+    }
+
+    Telegram_Com T (answer);
+    qDebug() << "Final Answer is: " << T.data;
+    return T.data;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

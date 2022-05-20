@@ -25,6 +25,7 @@ private slots:
 
 protected:
     bool sync;
+    QByteArray readSerial_async();
 
 private:
     QSerialPort *Com_Port;

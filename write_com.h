@@ -16,8 +16,8 @@ public:
     void send(char Identifier, int Data);
     void send(char Identifier);
 
-    void send_async(char Identifier, int Data);
-    void send_async(char Identifier);
+    QByteArray send_async(char Identifier, int Data);
+    QByteArray send_async(char Identifier);
 };
 
 #endif // WRITE_COM_H
