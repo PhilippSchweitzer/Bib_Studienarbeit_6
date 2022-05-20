@@ -4,8 +4,6 @@
 #include "header_com.h"
 #include "read_com.h"
 
-#define Vender_ID_ESP32 4292
-#define Product_ID_ESP32 60000
 
 
 class Raw_Com : public QObject, public Read_Com

@@ -19,7 +19,7 @@ class Telegram_Com : public CRC_Com
 {
 
 public:
-    Telegram_Com(QByteArray);
+    Telegram_Com(QByteArray raw_telegram);
     Telegram_Com(char Identifier, int Data);
     Telegram_Com(char Identifier);
     virtual ~Telegram_Com();

@@ -15,7 +15,7 @@ Telegram_Com::Telegram_Com(QByteArray raw_Data)
 Telegram_Com::Telegram_Com(char Identifier, int Data)
 {
     QByteArray raw_Data;
-    //TODO: put this in Telegram Class
+
     raw_Data.push_back(Identifier);
     raw_Data.push_back(Data);
     raw_Data.push_front(raw_Data.size() + 2);
@@ -34,7 +34,7 @@ Telegram_Com::Telegram_Com(char Identifier, int Data)
 Telegram_Com::Telegram_Com(char Identifier)
 {
     QByteArray raw_Data;
-    //TODO: put this in Telegram Class
+
     raw_Data.push_back(Identifier);
     raw_Data.push_front(raw_Data.size() + 2);
     raw_Data.push_back(get_CRC(raw_Data, 0));

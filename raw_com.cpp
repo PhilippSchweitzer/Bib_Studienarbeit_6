@@ -21,7 +21,7 @@ Raw_Com::Raw_Com(QObject *parent)
 
         foreach(const QSerialPortInfo &SerialPortInfo, QSerialPortInfo::availablePorts())
         {
-            if(SerialPortInfo.vendorIdentifier() == Vender_ID_ESP32 && SerialPortInfo.productIdentifier() == Product_ID_ESP32)
+            if(SerialPortInfo.vendorIdentifier() == Vender_ID && SerialPortInfo.productIdentifier() == Product_ID)
             {
                 Com_Port_Name = SerialPortInfo.portName();
                 Com_Port_Available = true;

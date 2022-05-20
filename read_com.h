@@ -13,12 +13,16 @@ public:
 
 protected:
     void read(QByteArray);
-    void callback();    //TODO implementieren; Ruft die Funktion mit den Daten auf, erwartet Identifier und Daten
+    void callback(uint8_t identifier, QByteArray Data);
+
+signals:
+//TODO: implementieren sonst linkerfehler, dann wieder einkommentieren
+//    void callback1(QByteArray); // ID: 0x01
+//    void callback2(QByteArray); // ID: 0x02
 
 private:
     QByteArray Buffer;
     int current_Telegram_lenght;
-
 };
 
 

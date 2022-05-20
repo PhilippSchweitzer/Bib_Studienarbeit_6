@@ -21,17 +21,23 @@ void Read_Com::read(QByteArray in)
 
     else if(Buffer.size() == current_Telegram_lenght)
     {
-        //make Telgram out of Buffer
+        Telegram_Com T = Buffer;
         current_Telegram_lenght = 0;
-        callback(/*TODO*/);
+        callback((uint8_t)T.identifier, T.data);
     }
-
-
 
     return;
 }
 
-void Read_Com::callback()
+//TODO Liste aus configuration_com.h verwenden, eventuell auf lambda umstellen (unabhänig von Qt)
+void Read_Com::callback(uint8_t Identifier, QByteArray Data)
 {
 
+    for(int i = 0; i < function_id.size(); i++)
+    {
+        if(function_id[i].Identifier == Identifier)
+            function_id[i].callback(Data);
+    }
+
+    return;
 }
