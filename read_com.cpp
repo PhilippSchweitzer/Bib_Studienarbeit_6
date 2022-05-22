@@ -18,12 +18,13 @@ void Read_Com::get_Data(QByteArray in)
 
     Buffer.push_back(in);
 
-    qDebug() << "Buffer is:" << Buffer;
+    //qDebug() << "Buffer is:" << Buffer;
 
     if(Buffer.size() == 1)
         current_Telegram_lenght = in.toHex().toInt();
-    qDebug() << "Buffer size:" << Buffer.size();
-    qDebug() << "Complete Telegram will be:" << current_Telegram_lenght;
+
+    //qDebug() << "Buffer size:" << Buffer.size();
+    //qDebug() << "Complete Telegram will be:" << current_Telegram_lenght;
 
     if(Buffer.size() == current_Telegram_lenght)
     {

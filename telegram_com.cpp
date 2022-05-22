@@ -8,7 +8,7 @@ Telegram_Com::Telegram_Com(QByteArray raw_Data)
     lenght = (int) raw_Data[0];
     identifier = (char) raw_Data[1];
 
-    if(identifier == 0x01)
+    if(identifier == ID_ASYNC_ANSWER)
         async = true;
     else
         async = false;

@@ -4,10 +4,7 @@
 #include "header_com.h"
 #include "read_com.h"
 
-#define Vender_ID 4292
-#define Product_ID 60000
-
-#define NOT_CONNECTED 0
+//TODO: move defines and function list to one file (so that the user can configure all settings in one file)
 
 
 class Raw_Com : public QObject, public Read_Com

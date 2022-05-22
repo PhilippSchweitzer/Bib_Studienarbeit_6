@@ -12,7 +12,7 @@ public:
     CRC_Com();
     virtual ~CRC_Com();
 
-    char get_CRC(QByteArray, uint8_t remainder);
+    char get_CRC(QByteArray, uint8_t);
 
 private:
     uint8_t CRC8(uint8_t, uint8_t);

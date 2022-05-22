@@ -1,6 +1,5 @@
 #include "raw_com.h"
 
-
 Raw_Com::Raw_Com(QObject *parent)
 {
     //Important Debug to Identify ID's!
@@ -37,11 +36,11 @@ Raw_Com::Raw_Com(QObject *parent)
             Com_Port->setStopBits(QSerialPort::OneStop);
             Com_Port->setParity(QSerialPort::NoParity);
             Com_Port->setFlowControl(QSerialPort::NoFlowControl);
-            QObject::connect(Com_Port, SIGNAL(readyRead()), this, SLOT(readSerial()));
+            QObject::connect(Com_Port, SIGNAL(readyRead()), nullptr, SLOT(readSerial()));
         }
         else
         {
-            callback(0x00, NOT_CONNECTED);
+            callback(ID_CONNECTION_ERROR, NOT_CONNECTED);
         }
 
 }
@@ -88,7 +87,7 @@ QByteArray Raw_Com::readSerial_async()
 {
     QByteArray answer;
 
-    Com_Port->waitForReadyRead(2000);
+    Com_Port->waitForReadyRead(SerialTimeout);
     QByteArray serialData = Com_Port->read(1);
     answer.push_back(serialData);
     //qDebug() << "Lengt of Answer is: " << serialData;
@@ -96,7 +95,7 @@ QByteArray Raw_Com::readSerial_async()
 
     for(int i = 0; i < serialData.toHex().toInt() - 1; i++)
     {
-        Com_Port->waitForReadyRead(2000);
+        Com_Port->waitForReadyRead(SerialTimeout);
         answer.push_back(Com_Port->read(1));
         //qDebug() << "Answer is: " << answer;
     }
@@ -104,7 +103,7 @@ QByteArray Raw_Com::readSerial_async()
     Telegram_Com T (answer);
     //qDebug() << "Final Answer is: " << T.data;
 
-    if(T.async)
+    if(T.identifier == ID_ASYNC_ANSWER)
         return T.data;
     else
     {
