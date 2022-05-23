@@ -1,5 +1,6 @@
 #include "write_com.h"
 
+//TODO: int zu ByteArray ändern
 
 Write_Com::Write_Com()
 {

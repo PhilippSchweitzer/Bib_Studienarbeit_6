@@ -16,11 +16,13 @@ void error_connection_loss(QByteArray Data)
 
 void do_handshake(QByteArray Data)
 {
-       if(Data.toHex().toInt() == 0x01)
-           ESP32.send(ID_ASYNC_ANSWER, 0x01);
+       if(Data.toHex().toInt() == VERSION_TEST)
+           ESP32.send(ID_ASYNC_ANSWER, VERSION_TEST);
 
     return;
 }
+
+//Functions that are implemented by the User:
 
 void example5(QByteArray Data)
 {
@@ -40,6 +42,13 @@ void example4(QByteArray Data)
     return;
 }
 
+
+//
+//
+//TODO: Funktion die diesen Vektor liefert; Vektor static definieren
+//
+//
+
 std::vector<Function_Id_Com> function_id_list =
 {
     {ID_CONNECTION_ERROR, error_connection_loss},       //function for error handling; can receive different error codes
@@ -48,7 +57,7 @@ std::vector<Function_Id_Com> function_id_list =
                                                         //used to identify answer to an send_async (therefor no callback needed),
                                                         //these will come in an specific order so there is no need for
                                                         //a specific ID for each answer
-    {ID_CONNECTION_TEST, do_handshake},
+    {ID_HANDSHAKE, do_handshake},
 
     {ID_EXAMPLE5, example5},                            //user implemented functions, can eighter directly do something or
     {ID_EXAMPLE3, example3},                            //convert the ByteArray to the needed datatype and then call another function

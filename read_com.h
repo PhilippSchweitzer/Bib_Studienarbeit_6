@@ -14,7 +14,7 @@ public:
     virtual ~Read_Com();
 
 protected:
-    void get_Data(QByteArray);
+    void collect_Data(QByteArray);
     void callback(uint8_t identifier, QByteArray Data);
 
 private:

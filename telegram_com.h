@@ -8,9 +8,9 @@
 
     Telegram:
     Byte    Function
-    0       Wie viele Bytes ist dieses Telegram lang
-    1       Identifier (Für welche Funktion sind die Daten bestimmt)
-    2 - X   Daten
+    0       How many Bytes does this Telegram contain
+    1       Identifier (wich function should be called with this data)
+    2 - X   Data
     X + 1   CRC
 
 ****************************************************************/

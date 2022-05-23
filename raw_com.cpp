@@ -1,5 +1,8 @@
 #include "raw_com.h"
 
+//TODO: alle QT Funktionen in seperate Datei auslagern
+
+
 Raw_Com::Raw_Com(QObject *parent)
 {
     //Important Debug to Identify ID's!
@@ -54,7 +57,7 @@ Raw_Com::~Raw_Com()
 void Raw_Com::write(QByteArray out)
 {
     Com_Port->write(out);
-    qDebug() << "Writing: " << out;
+    //qDebug() << "Writing: " << out;
     return;
 }
 
@@ -77,7 +80,7 @@ void Raw_Com::readSerial()
     {
         QByteArray serialData = Com_Port->read(1);
         qDebug() << "Reading: " << serialData;
-        get_Data(serialData);
+        collect_Data(serialData);
     }
 
     return;
@@ -86,7 +89,7 @@ void Raw_Com::readSerial()
 QByteArray Raw_Com::readSerial_async()
 {
     QByteArray answer;
-
+    //TODO: Error handling in case of a timeout
     Com_Port->waitForReadyRead(SerialTimeout);
     QByteArray serialData = Com_Port->read(1);
     answer.push_back(serialData);

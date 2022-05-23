@@ -12,8 +12,8 @@ Read_Com::~Read_Com()
 
 }
 
-
-void Read_Com::get_Data(QByteArray in)
+//TODO: Namen ändern
+void Read_Com::collect_Data(QByteArray in)
 {
 
     Buffer.push_back(in);

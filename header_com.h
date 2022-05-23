@@ -6,9 +6,14 @@
 #include <QDebug>
 #include <QSerialPort>
 #include <QSerialPortInfo>
+//TODO: QByteArray durch eigene Alternative ersetzen
 
 #define Vender_ID 4292
 #define Product_ID 60000
+
+#define VERSION_TEST 0x01               //This version number will be send back as an answer to the Handshake
+                                        //If you want to make shure that the microcontroller and the PC use the same IDs
+                                        //you should add your own Version IDs and test for them in the Handshake procedure
 
 #define SerialTimeout 2000              //2000ms
 
@@ -16,7 +21,7 @@
 #define HANDSHAKE_FAILURE 0x01          //Handshake Failed
 #define ID_CONNECTION_ERROR 0x00        //ID for error handling callback
 #define ID_ASYNC_ANSWER 0x01            //Identifys Answers to send_async and must only be used for that purpose
-#define ID_CONNECTION_TEST 0x02         //ID for Handshake
+#define ID_HANDSHAKE 0x02               //ID for Handshake
 
 //User defined IDs:
 
