@@ -12,7 +12,7 @@ Read_Com::~Read_Com()
 
 }
 
-//TODO: Namen ändern
+//TODO: CRC prüfung
 void Read_Com::collect_Data(QByteArray in)
 {
 
@@ -31,7 +31,9 @@ void Read_Com::collect_Data(QByteArray in)
         Telegram_Com T = Buffer;
         current_Telegram_lenght = 0;
         Buffer.clear();
-        callback((uint8_t)T.identifier, T.data);
+    //qDebug() << "crc_correct is: " << T.crc_correct;
+        if(T.crc_correct)
+            callback((uint8_t)T.identifier, T.data);
     }
 
     return;

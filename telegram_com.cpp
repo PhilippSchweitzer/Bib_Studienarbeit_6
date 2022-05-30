@@ -25,7 +25,7 @@ Telegram_Com::Telegram_Com(char Identifier, int Data)
     raw_Data.push_back(Identifier);
     raw_Data.push_back(Data);
     raw_Data.push_front(raw_Data.size() + 2);
-    raw_Data.push_back(get_CRC(raw_Data, 0));
+    raw_Data.push_back(get_CRC(raw_Data, CRC_SALT));
 
     //qDebug() << "Telegram is:" << raw_Data;
 
@@ -43,7 +43,7 @@ Telegram_Com::Telegram_Com(char Identifier)
 
     raw_Data.push_back(Identifier);
     raw_Data.push_front(raw_Data.size() + 2);
-    raw_Data.push_back(get_CRC(raw_Data, 0));
+    raw_Data.push_back(get_CRC(raw_Data, CRC_SALT));
 
     //qDebug() << "Telegram is:" << raw_Data;
 
@@ -60,13 +60,4 @@ Telegram_Com::~Telegram_Com()
 
 }
 
-
-bool Telegram_Com::check_CRC(QByteArray raw_Data)
-{
-
-    if(get_CRC(raw_Data, CRC_SALT) == 0)
-        return true;
-    else
-        return false;
-}
 

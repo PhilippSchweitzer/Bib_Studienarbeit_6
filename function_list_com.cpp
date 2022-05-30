@@ -2,8 +2,6 @@
 #include "write_com.h"
 
 
-//TODO: Beispiele entfernen
-
 void error_connection_loss(QByteArray Data)
 {
 
@@ -16,8 +14,8 @@ void error_connection_loss(QByteArray Data)
 
 void do_handshake(QByteArray Data)
 {
-       if(Data.toHex().toInt() == VERSION_TEST)
-           ESP32.send(ID_ASYNC_ANSWER, VERSION_TEST);
+ //      if(Data.toHex().toInt() == VERSION_TEST)
+   //        ESP32.send(ID_ASYNC_ANSWER, VERSION_TEST);
 
     return;
 }

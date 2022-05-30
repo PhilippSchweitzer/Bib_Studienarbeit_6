@@ -2,15 +2,15 @@
 #include <write_com.h>
 
 
-//each Com Port can only be opened once and needs to be accsessable for all functions that might need it
-//so it makes sense to define it globally
-Write_Com ESP32;
-
-
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
+
+
+    //each Com Port can only be opened once and needs to be accsessable for all functions that might need it
+    //so it also would make sense to define it globally
+    Write_Com ESP32;
 
     //Handshake at beginning to make shure the microcontroller uses the same protocoll
 
@@ -18,7 +18,9 @@ int main(int argc, char *argv[])
     //we need to send the expected answer
     //This is the Answer that the microcontroller will send back if the handshake worked
     if(ESP32.send_async(/*ID_HANDSHAKE*/ID_ASYNC_ANSWER, VERSION_TEST).toHex().toInt() != 1)
-        qDebug() << "Handshake Failure";
+       qDebug() << "Handshake Failure";
+    else
+       qDebug() << "Handshake Successfull";
 
     ESP32.send(ID_EXAMPLE3, 'a');
     ESP32.send(ID_EXAMPLE5, 'b');
@@ -55,7 +57,7 @@ int main(int argc, char *argv[])
     //This is not needed if the last send is an async send because these will do that anyway.
     //The ID_ASYNC_ANSWER is used. The reason is the same as in the first Handshake procedure.
     //In this case the Answer does not need to contain any data.
-    ESP32.send_async(ID_ASYNC_ANSWER/*ID_HANDSHAKE*/);
+    //ESP32.send_async(ID_ASYNC_ANSWER/*ID_HANDSHAKE*/);
 
     return a.exec();
 }

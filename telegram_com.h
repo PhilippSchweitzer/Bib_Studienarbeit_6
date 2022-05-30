@@ -30,9 +30,6 @@ public:
     QByteArray data;
     bool crc_correct;
     bool async;
-
-
-    bool check_CRC(QByteArray);
 };
 
 #endif // TELEGRAM_COM_H

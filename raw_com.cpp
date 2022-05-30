@@ -39,7 +39,7 @@ Raw_Com::Raw_Com(QObject *parent)
             Com_Port->setStopBits(QSerialPort::OneStop);
             Com_Port->setParity(QSerialPort::NoParity);
             Com_Port->setFlowControl(QSerialPort::NoFlowControl);
-            QObject::connect(Com_Port, SIGNAL(readyRead()), nullptr, SLOT(readSerial()));
+            QObject::connect(Com_Port, SIGNAL(readyRead()), this, SLOT(readSerial()));
         }
         else
         {
@@ -79,7 +79,7 @@ void Raw_Com::readSerial()
     if(sync == true)
     {
         QByteArray serialData = Com_Port->read(1);
-        qDebug() << "Reading: " << serialData;
+        //qDebug() << "Reading: " << serialData;
         collect_Data(serialData);
     }
 
@@ -106,13 +106,20 @@ QByteArray Raw_Com::readSerial_async()
     Telegram_Com T (answer);
     //qDebug() << "Final Answer is: " << T.data;
 
-    if(T.identifier == ID_ASYNC_ANSWER)
-        return T.data;
-    else
+    //qDebug() << "crc_correct is: " << T.crc_correct;
+    if(T.crc_correct)
     {
-        callback((uint8_t)T.identifier, T.data);
-        return readSerial_async();
+        if(T.identifier == ID_ASYNC_ANSWER)
+            return T.data;
+        else
+        {
+            callback((uint8_t)T.identifier, T.data);
+            return readSerial_async();
+        }
     }
+    else
+        return 0;
+
 }
 
 
