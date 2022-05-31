@@ -42,10 +42,10 @@ void Read_Com::collect_Data(QByteArray in)
 void Read_Com::callback(uint8_t Identifier, QByteArray Data)
 {
 
-    for(int i = 0; i < function_id_list.size(); i++)
+    for(int i = 0; i < function_identifier_list().size(); i++)
     {
-        if(function_id_list[i].Identifier == Identifier)
-            function_id_list[i].callback(Data);
+        if(function_identifier_list()[i].Identifier == Identifier)
+            function_identifier_list()[i].callback(Data);
     }
 
     return;

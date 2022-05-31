@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
     //so it also would make sense to define it globally
     Write_Com ESP32;
 
-    //Handshake at beginning to make shure the microcontroller uses the same protocoll
+    //Handshake at beginning to make sure the microcontroller uses the same protocoll
 
     //The microcontroller sends the same telegram back that it received so for this test
     //we need to send the expected answer

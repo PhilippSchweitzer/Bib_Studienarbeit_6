@@ -1,4 +1,3 @@
-#include "main.cpp"
 #include "write_com.h"
 
 
@@ -41,23 +40,23 @@ void example4(QByteArray Data)
 }
 
 
-//
-//
-//TODO: Funktion die diesen Vektor liefert; Vektor static definieren
-//
-//
-
-std::vector<Function_Id_Com> function_id_list =
+std::vector<Function_Id_Com> function_identifier_list()
 {
-    {ID_CONNECTION_ERROR, error_connection_loss},       //function for error handling; can receive different error codes
+    static std::vector<Function_Id_Com> list =
+    {
+        {ID_CONNECTION_ERROR, error_connection_loss},       //function for error handling; can receive different error codes
 
-    {ID_ASYNC_ANSWER, nullptr},                         //ID_ASYNC_ANSWER must only be used in Answers to an send_async
-                                                        //used to identify answer to an send_async (therefor no callback needed),
-                                                        //these will come in an specific order so there is no need for
-                                                        //a specific ID for each answer
-    {ID_HANDSHAKE, do_handshake},
+        {ID_ASYNC_ANSWER, nullptr},                         //ID_ASYNC_ANSWER must only be used in Answers to an send_async
+                                                            //used to identify answer to an send_async (therefor no callback needed),
+                                                            //these will come in an specific order so there is no need for
+                                                            //a specific ID for each answer
+        {ID_HANDSHAKE, do_handshake},
 
-    {ID_EXAMPLE5, example5},                            //user implemented functions, can eighter directly do something or
-    {ID_EXAMPLE3, example3},                            //convert the ByteArray to the needed datatype and then call another function
-    {ID_EXAMPLE4, example4}
-};
+        {ID_EXAMPLE5, example5},                            //user implemented functions, can eighter directly do something or
+        {ID_EXAMPLE3, example3},                            //convert the ByteArray to the needed datatype and then call another function
+        {ID_EXAMPLE4, example4}
+    };
+
+    return list;
+}
+
